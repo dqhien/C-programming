@@ -11,13 +11,11 @@ int printTriangle(int size) {
         //increment starCount
       starCount++;
     }
-     //when you finish counting on j, 
-
-     //print a newline ("\n")
+    //when you finish counting on j, 
+    //print a newline ("\n")
     printf("\n");
   }
   //when you finish counting on i, 
-
   //your answer is starCount
   return starCount;
 }
