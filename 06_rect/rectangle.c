@@ -17,11 +17,9 @@ int max (int a, int b) {
 
 //Declare your rectangle structure here!
 struct rect_t {
-  int x;
-  int y;
-  int width;
-  int height;
-} typedef rectangle;
+  int x,y,width,height;
+};
+typedef struct rect_t rectangle;
 
 rectangle canonicalize(rectangle r) {
   //WRITE THIS FUNCTION
@@ -59,12 +57,12 @@ rectangle intersection(rectangle r1, rectangle r2) {
       }
     }
   }
-  int rightTopX = min(r1.x + r1.width, r2.x + r2.width);
-  int rightTopY = min(r1.y + r1.height, r2.y + r2.height);
+  int rightTopCornerX = min(r1.x + r1.width, r2.x + r2.width);
+  int rightTopCornerY = min(r1.y + r1.height, r2.y + r2.height);
   rec.x = max(r1.x, r2.x);
   rec.y = max(r1.y, r2.y);
-  rec.width = max(0, rightTopX - rec.x);
-  rec.height = max(0, rightTopY - rec.y);
+  rec.width = max(0, rightTopCornerX - rec.x);
+  rec.height = max(0, rightTopCornerY - rec.y);
   return rec;
 }
 
