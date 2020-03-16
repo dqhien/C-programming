@@ -27,21 +27,45 @@ rectangle canonicalize(rectangle r) {
   //WRITE THIS FUNCTION
   if (r.width < 0) {
     r.x = r.x + r.width;
-    r.width = 0 - r.width;
+    r.width *= -1;
   }
   if (r.height < 0) {
     r.y = r.y + r.height;
-    r.height = 0 - r.height;
+    r.height *= -1;
   }
   return r;
 }
 rectangle intersection(rectangle r1, rectangle r2) {
   //WRITE THIS FUNCTION
-  r1.x = max(r1.x, r2.x);
-  r1.y = max(r1.y, r2.y);
-  r1.width = min(r1.width, r2.width);
-  r1.height = min(r1.height, r2.height);
-  return r1;
+  r1 = canonicalize(r1);
+  r2 = canonicalize(r2);
+  rectangle rec = {0,0,0,0};
+  if (r1.x < r2.x) {
+    if (r1.x + r1.width < r2.x) {
+      return rec;
+    }
+  } else {
+    if (r2.x + r2.width < r1.x) {
+      return rec;
+    }
+  }
+
+  if (r1.y < r2.y) {
+    if (r1.y + r1.height < r2.y) {
+      return rec;
+    } else {
+      if (r2.y + r2.height < r1.y) {
+	return rec;
+      }
+    }
+  }
+  int rightTopX = min(r1.x + r1.width, r2.x + r2.width);
+  int rightTopY = min(r1.y + r1.height, r2.y + r2.height);
+  rec.x = max(r1.x, r2.x);
+  rec.y = max(r1.y, r2.y);
+  rec.width = max(0, rightTopX - rec.x);
+  rec.height = max(0, rightTopY - rec.y);
+  return rec;
 }
 
 //You should not need to modify any code below this line
@@ -142,6 +166,7 @@ int main (void) {
   printRectangle(i);
 
   //test everything with r4
+
   i = intersection(r4,r1);
   printf("intersection(r4,r1): ");
   printRectangle(i);
