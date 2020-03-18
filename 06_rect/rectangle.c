@@ -51,12 +51,13 @@ rectangle intersection(rectangle r1, rectangle r2) {
   if (r1.y < r2.y) {
     if (r1.y + r1.height < r2.y) {
       return rec;
-    } else {
+    }
+  } else {
       if (r2.y + r2.height < r1.y) {
 	return rec;
       }
     }
-  }
+  
   int rightTopCornerX = min(r1.x + r1.width, r2.x + r2.width);
   int rightTopCornerY = min(r1.y + r1.height, r2.y + r2.height);
   rec.x = max(r1.x, r2.x);
